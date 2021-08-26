@@ -1,5 +1,5 @@
 
-def sxor(s1,s2):
+def sxor(s1, s2):
     return bytes([_a ^ _b for _a, _b in zip(s1,s2)])
 
 def main():

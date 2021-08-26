@@ -23,13 +23,11 @@ def single_byte_xor(input_byte, character):
     return output_byte
 
 
-def main():
-    cyphertext = bytes.fromhex("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")
-
+def brute_force_xor(cypher_text):
     potential_message = []
 
     for possible_key in range(256):
-        message = single_byte_xor(cyphertext, possible_key)
+        message = single_byte_xor(cypher_text, possible_key)
         score = english_score(message)
         data = {
             'message': message,
@@ -38,13 +36,17 @@ def main():
         }
         potential_message.append(data)
 
-    best_score = sorted(potential_message, key=lambda x: x['score'], reverse=True)
+    best_score = sorted(potential_message, key=lambda x: x['score'], reverse=True)[0]
 
-    for item in best_score:
-        print("key: ", item.get("possible_key"), "message: ", item.get("message").decode(), " score: ",
-              item.get("score"))
+    return best_score
 
-        input()
+
+def main():
+    cyphertext = bytes.fromhex("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")
+
+    item = brute_force_xor(cyphertext)
+
+    print("key: ", item.get("possible_key"), "message: ", item.get("message").decode(), " score: ", item.get("score"))
 
 
 if __name__ == "__main__":
