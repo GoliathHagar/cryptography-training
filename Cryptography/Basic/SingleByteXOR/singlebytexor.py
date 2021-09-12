@@ -1,6 +1,6 @@
 #
 def english_score(input_bytes):
-    default_frequencies = 0
+    default_frequencies = 0 #Penality for nom english ascii "e" value
     char_frequencies = {
         'a': .08167, 'b': .01492, 'c': .02782, 'd': .04253,
         'e': .12702, 'f': .02228, 'g': .02015, 'h': .06094,
@@ -11,7 +11,11 @@ def english_score(input_bytes):
         'y': .01974, 'z': .00074, ' ': .13000
     }
 
-    return sum([char_frequencies.get(chr(byte), default_frequencies) for byte in input_bytes.lower()])
+    return (
+            sum(
+                [char_frequencies.get(chr(byte), default_frequencies) for byte in input_bytes.lower()]
+            )
+    )
 
 
 def single_byte_xor(input_byte, character):
@@ -36,9 +40,9 @@ def brute_force_xor(cypher_text):
         }
         potential_message.append(data)
 
-    best_score = sorted(potential_message, key=lambda x: x['score'], reverse=True)[0]
+    best_score = sorted(potential_message, key=lambda x: x['score'], reverse=True)
 
-    return best_score
+    return best_score[0]
 
 
 def main():
