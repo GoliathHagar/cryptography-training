@@ -104,20 +104,20 @@ def main():
     """
     ciphertext = b''
     message = b"Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
-    key = b"ICED"
+    key = b"ICE"
 
     ciphertext = repeating_key_xor(message, key)
 
     print("repeatingkeyxored: ", ciphertext.hex())
 
-    breaked = breaking_repeating_key_xor(ciphertext, 8)
+    breaked = breaking_repeating_key_xor(ciphertext, 5)
     print("Key=", breaked['possible_key'].decode(), "\nbreaking=", breaked['possible_message'].decode())
 
-    # with open('encripted.txt') as input_file:
-    #     ciphertext = base64.b64decode(input_file.read())
-    #
-    # breaked = breaking_repeating_key_xor(ciphertext)
-    # print("Key=", breaked['possible_key'].decode(), "\nbreaking=", breaked['possible_message'].decode())
+    with open('encripted.txt') as input_file:
+        ciphertext = base64.b64decode(input_file.read())
+
+    breaked = breaking_repeating_key_xor(ciphertext, 17)
+    print("\n\nKey=", breaked['possible_key'].decode(), "\nbreaking=", breaked['possible_message'].decode())
 
 
 if __name__ == "__main__":
