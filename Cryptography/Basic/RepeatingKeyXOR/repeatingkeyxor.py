@@ -63,6 +63,12 @@ def compute_key_size(text: bytes) -> list[dict]:
 
 
 def breaking_repeating_key_xor(ciphertext: bytes, top_score=20):  # best top 20 score key size
+    """
+    https://arpitbhayani.me/blogs/decipher-repeated-key-xor
+    :param ciphertext:
+    :param top_score:
+    :return:
+    """
     possible_key_sizes = compute_key_size(ciphertext)
     top_sizes = top_score if len(possible_key_sizes) >= top_score else len(possible_key_sizes)
 
